@@ -632,4 +632,38 @@
     color: var(--global-hover-color) !important;
   }
   
+
+  .supervision-section {
+    margin-bottom: 2rem;
+  }
+  .student-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .student-list li {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .student-list li strong {
+    font-size: 1.1rem;
+    color: #2c3e50;
+  }
+  
+  .student-list li p {
+    margin: 0.5rem 0 0 0;
+    color: #555;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .fade-in {
+    animation: fadeIn 1s ease-in;
+  }
   /*# sourceMappingURL=main.css.map */
