@@ -157,7 +157,7 @@
         <div class="post">
             <header class="post-header">
                 <h1 class="post-title">Publications</h1>
-                <p class="post-description">My research publications sorted by categories and year</p>
+                <!-- <p class="post-description">My research publications sorted by categories and year</p> -->
             </header>
 
             <article>
@@ -203,9 +203,11 @@
         // Load and parse BibTeX file
         async function loadPublications() {
             try {
-                const response = await fetch('/assets/publications.bib');
+                const response = await fetch('assets/publications.bib');
                 const bibtex = await response.text();
+                console.log('Loaded BibTeX:', bibtex); // 添加调试日志
                 const parsed = bibtexParse.toJSON(bibtex);
+                console.log('Parsed publications:', parsed); // 添加调试日志
                 
                 const publications = {
                     conference: [],
@@ -216,16 +218,23 @@
 
                 // Categorize publications
                 parsed.forEach(pub => {
+                    console.log('Processing publication:', pub); // 添加调试日志
                     if (pub.entryType === 'inproceedings') {
                         publications.conference.push(pub);
                     } else if (pub.entryType === 'article') {
-                        publications.journal.push(pub);
+                        if (pub.entryTags.journal && pub.entryTags.journal.toLowerCase().includes('arxiv')) {
+                            publications.preprint.push(pub);
+                        } else {
+                            publications.journal.push(pub);
+                        }
                     } else if (pub.entryType === 'misc' && pub.entryTags.archivePrefix === 'arXiv') {
                         publications.preprint.push(pub);
                     } else if (pub.entryType === 'patent') {
                         publications.patent.push(pub);
                     }
                 });
+
+                console.log('Categorized publications:', publications); // 添加调试日志
 
                 // Sort each category by year
                 Object.keys(publications).forEach(type => {
@@ -249,6 +258,11 @@
                 
                 container.innerHTML = '';
                 
+                if (!publications[type] || publications[type].length === 0) {
+                    console.log(`No publications for type: ${type}`); // 添加调试日志
+                    return;
+                }
+
                 const years = [...new Set(publications[type].map(p => p.entryTags.year))].sort((a, b) => b - a);
                 
                 years.forEach(year => {
@@ -284,6 +298,8 @@
             const publications = await loadPublications();
             if (publications) {
                 renderPublications(publications);
+            } else {
+                console.error('Failed to load publications'); // 添加调试日志
             }
         });
     </script>
