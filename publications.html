@@ -51,7 +51,18 @@
     <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 
     <!-- BibTeX Parser -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bibtex-parse-js/0.0.24/bibtexParse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bibtex-parse-js@0.0.24/bibtexParse.min.js"></script>
+    <!-- 备用 BibTeX Parser -->
+    <script>
+        // 如果主要的 CDN 失败，尝试使用备用源
+        window.addEventListener('error', function(e) {
+            if (e.target.src && e.target.src.includes('bibtex-parse-js')) {
+                const script = document.createElement('script');
+                script.src = 'https://raw.githubusercontent.com/ORCID/bibtexParseJs/master/bibtexParse.js';
+                document.head.appendChild(script);
+            }
+        }, true);
+    </script>
 
     <!-- Custom CSS for publications -->
     <style>
@@ -200,14 +211,44 @@
 
     <!-- Custom JS for handling publications -->
     <script>
+        // Load BibTeX file content
+        async function fetchBibTeX() {
+            try {
+                const response = await fetch('assets/publications.bib');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return await response.text();
+            } catch (e) {
+                console.error('Error fetching BibTeX file:', e);
+                return null;
+            }
+        }
+
         // Load and parse BibTeX file
         async function loadPublications() {
             try {
-                const response = await fetch('assets/publications.bib');
-                const bibtex = await response.text();
-                console.log('Loaded BibTeX:', bibtex); // 添加调试日志
-                const parsed = bibtexParse.toJSON(bibtex);
-                console.log('Parsed publications:', parsed); // 添加调试日志
+                // 确保 bibtexParse 已加载
+                if (typeof bibtexParse === 'undefined') {
+                    console.error('BibTeX parser not loaded');
+                    return null;
+                }
+
+                const bibtex = await fetchBibTeX();
+                if (!bibtex) return null;
+
+                console.log('Loaded BibTeX:', bibtex);
+                
+                // 解析 BibTeX
+                let parsed;
+                try {
+                    parsed = bibtexParse.toJSON(bibtex);
+                } catch (parseError) {
+                    console.error('Error parsing BibTeX:', parseError);
+                    return null;
+                }
+                
+                console.log('Parsed publications:', parsed);
                 
                 const publications = {
                     conference: [],
@@ -218,7 +259,12 @@
 
                 // Categorize publications
                 parsed.forEach(pub => {
-                    console.log('Processing publication:', pub); // 添加调试日志
+                    if (!pub || !pub.entryType || !pub.entryTags) {
+                        console.warn('Invalid publication entry:', pub);
+                        return;
+                    }
+
+                    console.log('Processing publication:', pub);
                     if (pub.entryType === 'inproceedings') {
                         publications.conference.push(pub);
                     } else if (pub.entryType === 'article') {
@@ -234,7 +280,7 @@
                     }
                 });
 
-                console.log('Categorized publications:', publications); // 添加调试日志
+                console.log('Categorized publications:', publications);
 
                 // Sort each category by year
                 Object.keys(publications).forEach(type => {
@@ -293,13 +339,21 @@
             });
         }
 
-        // Initial load and render
-        document.addEventListener('DOMContentLoaded', async () => {
-            const publications = await loadPublications();
-            if (publications) {
-                renderPublications(publications);
-            } else {
-                console.error('Failed to load publications'); // 添加调试日志
+        // 等待页面和所有脚本加载完成
+        window.addEventListener('load', async () => {
+            try {
+                const publications = await loadPublications();
+                if (publications) {
+                    renderPublications(publications);
+                } else {
+                    console.error('Failed to load publications');
+                    // 显示错误信息给用户
+                    document.querySelectorAll('.publications-list').forEach(container => {
+                        container.innerHTML = '<div class="alert alert-warning">Unable to load publications. Please try again later.</div>';
+                    });
+                }
+            } catch (e) {
+                console.error('Error in main execution:', e);
             }
         });
     </script>
