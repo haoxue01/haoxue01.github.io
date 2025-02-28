@@ -4,11 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>
-        Hao Xue
-    </title>
-    <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
-">
+    <title>Publications | Hao Xue</title>
+    <meta name="description" content="Publications of Hao Xue">
     <!-- Open Graph -->
     <!-- Bootstrap & MDB -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"
@@ -52,6 +49,46 @@
     <script defer type="text/javascript" id="MathJax-script"
         src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
     <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+    <!-- BibTeX Parser -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bibtex-parse-js/0.0.24/bibtexParse.min.js"></script>
+
+    <!-- Custom CSS for publications -->
+    <style>
+        .publication-section {
+            margin-bottom: 2rem;
+        }
+        .publication-year {
+            color: #666;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        .publication-item {
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 3px solid #f0f0f0;
+        }
+        .publication-title {
+            font-weight: 500;
+            color: #2a2a2a;
+        }
+        .publication-authors {
+            font-style: italic;
+            color: #666;
+        }
+        .publication-venue {
+            color: #444;
+        }
+        .publication-links a {
+            margin-right: 1rem;
+            color: #007bff;
+        }
+        .bibtex-input {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body class="fixed-top-nav sticky-bottom-footer">
     <!-- Header -->
@@ -120,12 +157,34 @@
         <div class="post">
             <header class="post-header">
                 <h1 class="post-title">Publications</h1>
-                <p class="post-description"></p>
+                <p class="post-description">My research publications sorted by categories and year</p>
             </header>
 
             <article>
                 <div class="publications">
-                    <p>Please see <a href="https://scholar.google.com/citations?user=KwhLl7IAAAAJ&hl">my Google Scholar</a> for papers while I am constructing this page &#128517</p>
+                    <!-- Conference Papers -->
+                    <div class="publication-section" id="conference-papers">
+                        <h2>Conference Papers</h2>
+                        <div class="publications-list" id="conference-list"></div>
+                    </div>
+
+                    <!-- Journal Papers -->
+                    <div class="publication-section" id="journal-papers">
+                        <h2>Journal Papers</h2>
+                        <div class="publications-list" id="journal-list"></div>
+                    </div>
+
+                    <!-- Preprints -->
+                    <div class="publication-section" id="preprints">
+                        <h2>Preprints</h2>
+                        <div class="publications-list" id="preprint-list"></div>
+                    </div>
+
+                    <!-- Patents -->
+                    <div class="publication-section" id="patents">
+                        <h2>Patents</h2>
+                        <div class="publications-list" id="patent-list"></div>
+                    </div>
                 </div>
             </article>
 
@@ -134,10 +193,100 @@
     <!-- Footer -->
     <footer class="sticky-bottom mt-5">
         <div class="container">
-            &copy; Copyright 2024 Hao Xue.
-            Last updated: July 7, 2024.
+            &copy; Copyright 2025 Hao Xue.
+            Last updated: Feb. 3, 2025.
         </div>
     </footer>
+
+    <!-- Custom JS for handling publications -->
+    <script>
+        // Load and parse BibTeX file
+        async function loadPublications() {
+            try {
+                const response = await fetch('/assets/publications.bib');
+                const bibtex = await response.text();
+                const parsed = bibtexParse.toJSON(bibtex);
+                
+                const publications = {
+                    conference: [],
+                    journal: [],
+                    preprint: [],
+                    patent: []
+                };
+
+                // Categorize publications
+                parsed.forEach(pub => {
+                    if (pub.entryType === 'inproceedings') {
+                        publications.conference.push(pub);
+                    } else if (pub.entryType === 'article') {
+                        publications.journal.push(pub);
+                    } else if (pub.entryType === 'misc' && pub.entryTags.archivePrefix === 'arXiv') {
+                        publications.preprint.push(pub);
+                    } else if (pub.entryType === 'patent') {
+                        publications.patent.push(pub);
+                    }
+                });
+
+                // Sort each category by year
+                Object.keys(publications).forEach(type => {
+                    publications[type].sort((a, b) => (b.entryTags.year || 0) - (a.entryTags.year || 0));
+                });
+
+                return publications;
+            } catch (e) {
+                console.error('Error loading publications:', e);
+                return null;
+            }
+        }
+
+        // Render publications by type
+        function renderPublications(publications) {
+            const types = ['conference', 'journal', 'preprint', 'patent'];
+            
+            types.forEach(type => {
+                const container = document.getElementById(`${type}-list`);
+                if (!container) return;
+                
+                container.innerHTML = '';
+                
+                const years = [...new Set(publications[type].map(p => p.entryTags.year))].sort((a, b) => b - a);
+                
+                years.forEach(year => {
+                    const yearPubs = publications[type].filter(p => p.entryTags.year === year);
+                    if (yearPubs.length > 0) {
+                        const yearDiv = document.createElement('div');
+                        yearDiv.className = 'publication-year';
+                        yearDiv.textContent = year;
+                        container.appendChild(yearDiv);
+                        
+                        yearPubs.forEach(pub => {
+                            const pubDiv = document.createElement('div');
+                            pubDiv.className = 'publication-item';
+                            pubDiv.innerHTML = `
+                                <div class="publication-title">${pub.entryTags.title}</div>
+                                <div class="publication-authors">${pub.entryTags.author}</div>
+                                <div class="publication-venue">${pub.entryTags.booktitle || pub.entryTags.journal || ''}</div>
+                                <div class="publication-links">
+                                    ${pub.entryTags.url ? `<a href="${pub.entryTags.url}" target="_blank">Paper</a>` : ''}
+                                    ${pub.entryTags.code ? `<a href="${pub.entryTags.code}" target="_blank">Code</a>` : ''}
+                                    ${pub.entryTags.video ? `<a href="${pub.entryTags.video}" target="_blank">Video</a>` : ''}
+                                </div>
+                            `;
+                            container.appendChild(pubDiv);
+                        });
+                    }
+                });
+            });
+        }
+
+        // Initial load and render
+        document.addEventListener('DOMContentLoaded', async () => {
+            const publications = await loadPublications();
+            if (publications) {
+                renderPublications(publications);
+            }
+        });
+    </script>
 </body>
 <!-- Bootsrap & MDB scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js"
