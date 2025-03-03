@@ -394,11 +394,46 @@
             margin-top: 1.5rem;
             margin-bottom: 1rem;
             font-size: 1.2rem;
+            cursor: pointer;
+            user-select: none;
+        }
+        .publication-year:hover {
+            color: var(--global-theme-color);
+        }
+        .publication-year::before {
+            content: '▼';
+            display: inline-block;
+            margin-right: 5px;
+            transition: transform 0.2s;
+            font-size: 0.8em;
+        }
+        .publication-year.collapsed::before {
+            transform: rotate(-90deg);
+        }
+        .publication-section h2 {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: center;
+        }
+        .publication-section h2:hover {
+            color: var(--global-theme-color);
+        }
+        .publication-section h2::before {
+            content: '▼';
+            display: inline-block;
+            margin-right: 10px;
+            transition: transform 0.2s;
+            font-size: 0.8em;
+        }
+        .publication-section h2.collapsed::before {
+            transform: rotate(-90deg);
         }
         .publication-item {
             margin-bottom: 1.5rem;
             padding-left: 1rem;
             border-left: 3px solid var(--global-divider-color);
+            transition: opacity 0.3s, max-height 0.3s;
         }
         .publication-title {
             font-weight: 500;
@@ -418,6 +453,20 @@
         .publication-links a:hover {
             color: var(--global-hover-color);
             text-decoration: none;
+        }
+        .publications-list {
+            transition: max-height 0.3s ease-out;
+            overflow: hidden;
+        }
+        .publications-list.collapsed {
+            max-height: 0 !important;
+        }
+        .year-group {
+            transition: max-height 0.3s ease-out;
+            overflow: hidden;
+        }
+        .year-group.collapsed {
+            max-height: 0 !important;
         }
         
         /* Dark theme specific styles */
@@ -520,25 +569,25 @@
                 <div class="publications">
                     <!-- Conference Papers -->
                     <div class="publication-section" id="conference-papers">
-                        <h2>Conference Papers</h2>
+                        <h2 onclick="toggleSection('conference-papers')">Conference Papers</h2>
                         <div class="publications-list" id="conference-list"></div>
                     </div>
 
                     <!-- Journal Papers -->
                     <div class="publication-section" id="journal-papers">
-                        <h2>Journal Papers</h2>
+                        <h2 onclick="toggleSection('journal-papers')">Journal Papers</h2>
                         <div class="publications-list" id="journal-list"></div>
                     </div>
 
                     <!-- Preprints -->
                     <div class="publication-section" id="preprints">
-                        <h2>Preprints</h2>
+                        <h2 onclick="toggleSection('preprints')">Preprints</h2>
                         <div class="publications-list" id="preprint-list"></div>
                     </div>
 
                     <!-- Patents -->
                     <div class="publication-section" id="patents">
-                        <h2>Patents</h2>
+                        <h2 onclick="toggleSection('patents')">Patents</h2>
                         <div class="publications-list" id="patent-list"></div>
                     </div>
                 </div>
@@ -613,15 +662,39 @@
                     if (pub.entryType === 'inproceedings') {
                         publications.conference.push(pub);
                     } else if (pub.entryType === 'article') {
-                        if (pub.entryTags.journal && pub.entryTags.journal.toLowerCase().includes('arxiv')) {
+                        // 检查是否为预印本
+                        const isPreprint = pub.entryTags.journal && 
+                            (pub.entryTags.journal.toLowerCase().includes('arxiv') || 
+                             pub.entryTags.journal.toLowerCase().includes('preprint')) ||
+                            (pub.entryTags.archivePrefix && 
+                             pub.entryTags.archivePrefix.toLowerCase() === 'arxiv') ||
+                            (pub.entryTags.note && 
+                             pub.entryTags.note.toLowerCase().includes('preprint'));
+
+                        if (isPreprint) {
                             publications.preprint.push(pub);
                         } else {
                             publications.journal.push(pub);
                         }
-                    } else if (pub.entryType === 'misc' && pub.entryTags.archivePrefix === 'arXiv') {
-                        publications.preprint.push(pub);
+                    } else if (pub.entryType === 'misc') {
+                        // misc 类型的条目也可能是预印本
+                        const isPreprint = (pub.entryTags.archivePrefix && 
+                                         pub.entryTags.archivePrefix.toLowerCase() === 'arxiv') ||
+                                        (pub.entryTags.note && 
+                                         pub.entryTags.note.toLowerCase().includes('preprint')) ||
+                                        (pub.entryTags.journal && 
+                                         pub.entryTags.journal.toLowerCase().includes('arxiv'));
+                        
+                        if (isPreprint) {
+                            publications.preprint.push(pub);
+                        }
                     } else if (pub.entryType === 'patent') {
                         publications.patent.push(pub);
+                    }
+
+                    // 如果有 arXiv 编号但没被归类为预印本，也将其归类为预印本
+                    if (pub.entryTags.eprint && !publications.preprint.includes(pub)) {
+                        publications.preprint.push(pub);
                     }
                 });
 
@@ -662,14 +735,30 @@
                         const yearDiv = document.createElement('div');
                         yearDiv.className = 'publication-year';
                         yearDiv.textContent = year;
+                        yearDiv.onclick = () => toggleYear(yearDiv);
                         container.appendChild(yearDiv);
+                        
+                        const yearGroup = document.createElement('div');
+                        yearGroup.className = 'year-group';
                         
                         yearPubs.forEach(pub => {
                             const pubDiv = document.createElement('div');
                             pubDiv.className = 'publication-item';
+                            
+                            // 处理作者名字，将 "Hao Xue" 加粗
+                            const authors = pub.entryTags.author.split(' and ')
+                                .map(author => author.trim())
+                                .map(author => {
+                                    if (author.includes('Xue, Hao')) {
+                                        return `<strong>${author}</strong>`;
+                                    }
+                                    return author;
+                                })
+                                .join(', ');
+
                             pubDiv.innerHTML = `
                                 <div class="publication-title">${pub.entryTags.title}</div>
-                                <div class="publication-authors">${pub.entryTags.author}</div>
+                                <div class="publication-authors">${authors}</div>
                                 <div class="publication-venue">${pub.entryTags.booktitle || pub.entryTags.journal || ''}</div>
                                 <div class="publication-links">
                                     ${pub.entryTags.url ? `<a href="${pub.entryTags.url}" target="_blank">Paper</a>` : ''}
@@ -677,8 +766,10 @@
                                     ${pub.entryTags.video ? `<a href="${pub.entryTags.video}" target="_blank">Video</a>` : ''}
                                 </div>
                             `;
-                            container.appendChild(pubDiv);
+                            yearGroup.appendChild(pubDiv);
                         });
+                        
+                        container.appendChild(yearGroup);
                     }
                 });
             });
@@ -690,6 +781,8 @@
                 const publications = await loadPublications();
                 if (publications) {
                     renderPublications(publications);
+                    // 初始化折叠状态
+                    initializeCollapsibleState();
                 } else {
                     console.error('Failed to load publications');
                     // 显示错误信息给用户
@@ -701,6 +794,56 @@
                 console.error('Error in main execution:', e);
             }
         });
+
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const heading = section.querySelector('h2');
+            const list = section.querySelector('.publications-list');
+            
+            heading.classList.toggle('collapsed');
+            list.classList.toggle('collapsed');
+            
+            // Store the state
+            const isCollapsed = heading.classList.contains('collapsed');
+            localStorage.setItem(`section_${sectionId}`, isCollapsed);
+        }
+
+        function toggleYear(yearDiv) {
+            yearDiv.classList.toggle('collapsed');
+            const yearGroup = yearDiv.nextElementSibling;
+            yearGroup.classList.toggle('collapsed');
+            
+            // Store the state
+            const isCollapsed = yearDiv.classList.contains('collapsed');
+            const sectionId = yearDiv.closest('.publication-section').id;
+            const year = yearDiv.textContent.trim();
+            localStorage.setItem(`year_${sectionId}_${year}`, isCollapsed);
+        }
+
+        function initializeCollapsibleState() {
+            // Restore section states
+            document.querySelectorAll('.publication-section').forEach(section => {
+                const sectionId = section.id;
+                const isCollapsed = localStorage.getItem(`section_${sectionId}`) === 'true';
+                if (isCollapsed) {
+                    const heading = section.querySelector('h2');
+                    const list = section.querySelector('.publications-list');
+                    heading.classList.add('collapsed');
+                    list.classList.add('collapsed');
+                }
+            });
+
+            // Restore year states
+            document.querySelectorAll('.publication-year').forEach(yearDiv => {
+                const sectionId = yearDiv.closest('.publication-section').id;
+                const year = yearDiv.textContent.trim();
+                const isCollapsed = localStorage.getItem(`year_${sectionId}_${year}`) === 'true';
+                if (isCollapsed) {
+                    yearDiv.classList.add('collapsed');
+                    yearDiv.nextElementSibling.classList.add('collapsed');
+                }
+            });
+        }
     </script>
 </body>
 <!-- Bootsrap & MDB scripts -->
