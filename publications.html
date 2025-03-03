@@ -659,6 +659,9 @@
                     }
 
                     console.log('Processing publication:', pub);
+                    console.log('Entry type:', pub.entryType);
+                    console.log('Entry tags:', pub.entryTags);
+
                     if (pub.entryType === 'inproceedings') {
                         publications.conference.push(pub);
                     } else if (pub.entryType === 'article') {
@@ -671,20 +674,25 @@
                             (pub.entryTags.note && 
                              pub.entryTags.note.toLowerCase().includes('preprint'));
 
+                        console.log('Is article preprint?', isPreprint);
+
                         if (isPreprint) {
                             publications.preprint.push(pub);
                         } else {
                             publications.journal.push(pub);
                         }
-                    } else if (pub.entryType === 'misc') {
-                        // misc 类型的条目也可能是预印本
+                    } else if (pub.entryType === 'misc' || pub.entryType.toLowerCase() === 'arxiv') {
+                        // misc 类型或 arXiv 类型的条目都可能是预印本
                         const isPreprint = (pub.entryTags.archivePrefix && 
                                          pub.entryTags.archivePrefix.toLowerCase() === 'arxiv') ||
                                         (pub.entryTags.note && 
                                          pub.entryTags.note.toLowerCase().includes('preprint')) ||
                                         (pub.entryTags.journal && 
-                                         pub.entryTags.journal.toLowerCase().includes('arxiv'));
+                                         pub.entryTags.journal.toLowerCase().includes('arxiv')) ||
+                                        pub.entryType.toLowerCase() === 'arxiv';
                         
+                        console.log('Is misc/arxiv preprint?', isPreprint);
+
                         if (isPreprint) {
                             publications.preprint.push(pub);
                         }
@@ -694,11 +702,13 @@
 
                     // 如果有 arXiv 编号但没被归类为预印本，也将其归类为预印本
                     if (pub.entryTags.eprint && !publications.preprint.includes(pub)) {
+                        console.log('Found eprint:', pub.entryTags.eprint);
                         publications.preprint.push(pub);
                     }
                 });
 
-                console.log('Categorized publications:', publications);
+                console.log('Final categorized publications:', publications);
+                console.log('Preprints count:', publications.preprint.length);
 
                 // Sort each category by year
                 Object.keys(publications).forEach(type => {
