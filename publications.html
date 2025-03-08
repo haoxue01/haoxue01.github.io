@@ -831,27 +831,42 @@
         }
 
         function initializeCollapsibleState() {
-            // Restore section states
+            // Set all sections to collapsed by default
             document.querySelectorAll('.publication-section').forEach(section => {
+                const heading = section.querySelector('h2');
+                const list = section.querySelector('.publications-list');
+                
+                // Get stored state or default to collapsed
                 const sectionId = section.id;
-                const isCollapsed = localStorage.getItem(`section_${sectionId}`) === 'true';
+                const storedState = localStorage.getItem(`section_${sectionId}`);
+                const isCollapsed = storedState === null ? true : storedState === 'true';
+                
                 if (isCollapsed) {
-                    const heading = section.querySelector('h2');
-                    const list = section.querySelector('.publications-list');
                     heading.classList.add('collapsed');
                     list.classList.add('collapsed');
                 }
+                
+                // Store the initial state
+                localStorage.setItem(`section_${sectionId}`, isCollapsed);
             });
 
-            // Restore year states
+            // Set all years to collapsed by default
             document.querySelectorAll('.publication-year').forEach(yearDiv => {
+                const yearGroup = yearDiv.nextElementSibling;
                 const sectionId = yearDiv.closest('.publication-section').id;
                 const year = yearDiv.textContent.trim();
-                const isCollapsed = localStorage.getItem(`year_${sectionId}_${year}`) === 'true';
+                
+                // Get stored state or default to collapsed
+                const storedState = localStorage.getItem(`year_${sectionId}_${year}`);
+                const isCollapsed = storedState === null ? true : storedState === 'true';
+                
                 if (isCollapsed) {
                     yearDiv.classList.add('collapsed');
-                    yearDiv.nextElementSibling.classList.add('collapsed');
+                    yearGroup.classList.add('collapsed');
                 }
+                
+                // Store the initial state
+                localStorage.setItem(`year_${sectionId}_${year}`, isCollapsed);
             });
         }
     </script>
