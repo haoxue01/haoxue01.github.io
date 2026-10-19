@@ -34,7 +34,6 @@
     return '<li class="pub-item">' +
       '<div class="pub-meta">' +
         '<span class="pub-badge pub-badge--' + p.type + '">' + esc(p.abbr) + '</span>' +
-        '<span class="pub-id">' + esc(p.id) + '</span>' +
       '</div>' +
       '<div class="pub-body">' +
         '<div class="pub-title"><a href="' + esc(linkFor(p)) + '" target="_blank" rel="noopener">' + esc(p.title) + '</a>' +
@@ -69,8 +68,7 @@
       list.innerHTML = years.map(function (y) {
         var group = shown.filter(function (p) { return p.year === y; });
         return '<div class="pub-year">' +
-          '<h2 class="pub-year-heading">' + y + '<span class="pub-year-count">' + group.length +
-          (group.length === 1 ? ' publication' : ' publications') + '</span></h2>' +
+          '<h2 class="pub-year-heading">' + y + '</h2>' +
           '<ol class="pub-items">' + group.map(itemHTML).join('') + '</ol></div>';
       }).join('');
     }

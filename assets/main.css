@@ -384,11 +384,6 @@ html.transition *:after {
   padding-bottom: 0.35rem;
   margin-bottom: 0.5rem;
 }
-.pub-year-heading .pub-year-count {
-  font-size: 0.85rem;
-  font-weight: 400;
-  color: var(--global-muted-color);
-}
 .pub-items {
   list-style: none;
   padding: 0;
@@ -424,11 +419,6 @@ html.transition *:after {
 .pub-badge.pub-badge--patent {
   border-color: var(--global-muted-color);
   color: var(--global-muted-color);
-}
-.pub-id {
-  font-size: 0.75rem;
-  color: var(--global-muted-color);
-  font-variant-numeric: tabular-nums;
 }
 .pub-title {
   font-weight: 500;
