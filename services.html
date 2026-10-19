@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Services | Hao Xue</title>
-    <meta name="description" content="Academic services of Hao Xue">
-    
+    <title>Service | Hao Xue</title>
+    <meta name="description" content="Academic service of Hao Xue: organising committees, program committees, reviewing, talks and visits.">
     <!-- Bootstrap & MDB -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg=="
@@ -14,136 +13,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css"
         integrity="sha512-RO38pBRxYH3SoOprtPTD86JFOclM51/XTIdEPh5j8sj4tp8jmQIx26twG52UaLi//hQldfrh7e51WzP9wuP32Q=="
         crossorigin="anonymous" />
-    
     <!-- Fonts & Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+        integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css"
+        integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg=="
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
     <!-- Styles -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
     <link rel="stylesheet" href="/assets/main.css">
-    
-    <!-- JQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
-    <!-- Theming-->
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+        integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+        crossorigin="anonymous"></script>
+    <!-- Theming -->
     <script src="/assets/theme.js"></script>
     <script src="/assets/dark_mode.js"></script>
-
-    <!-- Custom CSS for services -->
-    <style>
-        .service-section {
-            margin-bottom: 2.5rem;
-        }
-        .service-section h2 {
-            color: var(--global-theme-color);
-            border-bottom: 1px solid var(--global-divider-color);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-            cursor: pointer;
-            user-select: none;
-            display: flex;
-            align-items: center;
-        }
-        .service-section h2::before {
-            content: '▼';
-            display: inline-block;
-            margin-right: 10px;
-            transition: transform 0.2s;
-            font-size: 0.8em;
-        }
-        .service-section h2.collapsed::before {
-            transform: rotate(-90deg);
-        }
-        .service-section .section-content {
-            transition: max-height 0.3s ease-out;
-            overflow: hidden;
-        }
-        .service-section .section-content.collapsed {
-            max-height: 0 !important;
-        }
-        .service-item {
-            margin-bottom: 1rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-        .service-item::before {
-            content: "•";
-            position: absolute;
-            left: 0.5rem;
-            color: var(--global-theme-color);
-        }
-        .service-year {
-            font-weight: 500;
-            color: var(--global-text-color);
-            margin-right: 0.5rem;
-        }
-        .service-role {
-            color: var(--global-text-color);
-        }
-        .service-venue {
-            color: var(--global-text-color-light);
-            font-style: italic;
-        }
-        [data-theme="dark"] .service-year {
-            color: var(--global-text-color);
-        }
-        [data-theme="dark"] .service-role {
-            color: var(--global-text-color);
-        }
-        [data-theme="dark"] .service-venue {
-            color: var(--global-text-color-light);
-        }
-    </style>
-
-    <script>
-        function toggleSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            const heading = section.querySelector('h2');
-            const content = section.querySelector('.section-content');
-            
-            heading.classList.toggle('collapsed');
-            content.classList.toggle('collapsed');
-            
-            // Store the state
-            const isCollapsed = heading.classList.contains('collapsed');
-            localStorage.setItem(`service_section_${sectionId}`, isCollapsed);
-        }
-
-        function initializeCollapsibleState() {
-            document.querySelectorAll('.service-section').forEach(section => {
-                const sectionId = section.id;
-                const heading = section.querySelector('h2');
-                const content = section.querySelector('.section-content');
-                
-                // Get stored state or default to collapsed
-                const storedState = localStorage.getItem(`service_section_${sectionId}`);
-                const isCollapsed = storedState === null ? true : storedState === 'true';
-                
-                if (isCollapsed) {
-                    heading.classList.add('collapsed');
-                    content.classList.add('collapsed');
-                }
-                
-                // Store the initial state
-                localStorage.setItem(`service_section_${sectionId}`, isCollapsed);
-            });
-        }
-
-        // Initialize when DOM is loaded
-        document.addEventListener('DOMContentLoaded', initializeCollapsibleState);
-    </script>
 </head>
-
 <body class="fixed-top-nav sticky-bottom-footer">
     <!-- Header -->
     <header>
-        <!-- Nav Bar -->
-        <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <nav id="navbar" class="navbar navbar-light navbar-expand-md fixed-top">
             <div class="container">
-                <a class="navbar-brand title font-weight-lighter" href="/"></a>
-                <!-- Navbar Toggle -->
+                <a class="navbar-brand title font-weight-lighter" href="/">Hao Xue</a>
                 <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse"
-                    data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar top-bar"></span>
                     <span class="icon-bar middle-bar"></span>
@@ -151,33 +48,26 @@
                 </button>
                 <div class="collapse navbar-collapse text-right" id="navbarNav">
                     <ul class="navbar-nav ml-auto flex-nowrap">
-                        <!-- About -->
                         <li class="nav-item">
-                            <a class="nav-link" href="/index.html">About</a>
+                            <a class="nav-link" href="/">About</a>
                         </li>
-                        <!-- Publications -->
                         <li class="nav-item">
                             <a class="nav-link" href="/publications.html">Publications</a>
                         </li>
-                        <!-- Teaching -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/awards.html">Grants &amp; Awards</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/teaching.html">Teaching</a>
                         </li>
-                        <!-- Services -->
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/services.html">Service<span class="sr-only">(current)</span></a>
-                        </li>
-                        <!-- Supervision -->
                         <li class="nav-item">
                             <a class="nav-link" href="/supervision.html">Supervision</a>
                         </li>
-                        <!-- CRUISE Lab -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://cruiseresearchgroup.github.io/">CRUISE Lab at UNSW</a>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/services.html">Service<span class="sr-only">(current)</span></a>
                         </li>
-                        <!-- Theme -->
                         <div class="toggle-container">
-                            <a id="light-toggle">
+                            <a id="light-toggle" role="button" tabindex="0" aria-label="Switch light/dark theme">
                                 <i class="fas fa-moon"></i>
                                 <i class="fas fa-sun"></i>
                             </a>
@@ -187,164 +77,261 @@
             </div>
         </nav>
     </header>
-
     <!-- Content -->
     <div class="container mt-5">
-        <div class="post">
-            <header class="post-header">
-                <h1 class="post-title">Academic Services 🎓</h1>
-            </header>
-
-            <article>
-                <!-- Conference Program Committee -->
-                <div class="service-section" id="conference-pc">
-                    <h2 onclick="toggleSection('conference-pc')">Conference Program Committee</h2>
-                    <div class="section-content">
-                        <div class="service-item">
-                            <span class="service-year">2025:</span>
-                            <span class="service-role">Program Committee Member</span>
-                            <span class="service-venue">AAAI, IJCAI, WWW, ICLR, ECMLPKDD, ACML, SSTD</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-year">2024:</span>
-                            <span class="service-role">Program Committee Member</span>
-                            <span class="service-venue">AAAI, IJCAI, WWW, MDM, NeurIPS, SIGSPATIAL, WACV</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-year">2023:</span>
-                            <span class="service-role">Program Committee Member</span>
-                            <span class="service-venue">AAAI, NeurIPS, IJCAI, CIKM, SIGSPATIAL, ECMLPKDD, PAKDD, MDM, ICONIP, PRICAI, SSTD, WACV</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-year">2022:</span>
-                            <span class="service-role">Program Committee Member</span>
-                            <span class="service-venue">WACV, AAAI, SIGSPATIAL</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-year">2021:</span>
-                            <span class="service-role">Program Committee Member</span>
-                            <span class="service-venue">IROS, PRICAI, WACV, CIKM</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-year">2020:</span>
-                            <span class="service-role">Program Committee Member</span>
-                            <span class="service-venue">WACV</span>
-                        </div>
+        <header class="post-header">
+            <h1 class="post-title">Academic Service 🎓</h1>
+        </header>
+        <section class="cv-section">
+            <h2>Conference and workshop organisation</h2>
+            <ul class="cv-rows">
+                <li class="cv-row">
+                    <div class="cv-when">Aug. 2026</div>
+                    <div>
+                        <div class="cv-title">Executive Chair, The 4th International Conference on Urban Science and Intelligence</div>
                     </div>
-                </div>
-
-                <!-- Journal Reviewer -->
-                <div class="service-section" id="journal-reviewer">
-                    <h2 onclick="toggleSection('journal-reviewer')">Journal Reviewer</h2>
-                    <div class="section-content">
-                        <div class="service-item">
-                            <span class="service-role">IEEE Transactions on Knowledge and Data Engineering (TKDE)</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-role">IEEE Transactions on Neural Networks and Learning Systems (TNNLS)</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-role">ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies (IMWUT)</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-role">ACM Transactions on Intelligent Systems and Technology (ACM TIST)</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-role">IEEE Transactions on Intelligent Transportation Systems (IEEE T-ITS)</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-role">ACM Transactions on Spatial Algorithms and Systems (ACM TSAS)</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-role">IEEE Transactions on Mobile Computing</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-role">IEEE Transactions on Multimedia (TMM)</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-role">Neural Networks</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-role">Neurocomputing</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-role">Computer Vision and Image Understanding</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-role">Pervasive and Mobile Computing</span>
-                        </div>
+                    <div class="cv-side">Guangzhou, China</div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">Nov. 2025</div>
+                    <div>
+                        <div class="cv-title">The 3rd ACM SIGSPATIAL International Workshop on Advances in Urban-AI (UrbanAI)</div>
+                        <div class="cv-detail">Workshop at ACM SIGSPATIAL 2025</div>
                     </div>
-                </div>
-
-                <!-- Conference Organization -->
-                <div class="service-section" id="conference-org">
-                    <h2 onclick="toggleSection('conference-org')">Conference/Workshop Organization</h2>
-                    <div class="section-content">
-                        <div class="service-item">
-                            <span class="service-year">2025:</span>
-                            <span class="service-role">Tutorial Co-Chair,</span>
-                            <span class="service-venue">International Symposium on Spatial and Temporal Data (SSTD)</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-year">2025:</span>
-                            <span class="service-role">The International Workshop on Spatio-Temporal Data Mining from the Web,</span>
-                            <span class="service-venue">ACM The Web Conference (WWW) Workshop</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-year">2025:</span>
-                            <span class="service-role">Time Series Analysis in the Web: Recent Advances and Future Trends,</span>
-                            <span class="service-venue">ACM The Web Conference (WWW)</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-year">2024:</span>
-                            <span class="service-role">Student Competition and Challenges Co-Chair,</span>
-                            <span class="service-venue">UbiComp / ISWC</span>
-                        </div>
+                    <div class="cv-side">Minneapolis, USA</div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">Oct. 2025</div>
+                    <div>
+                        <div class="cv-title">UbiSense: Emerging Techniques in Ubiquitous Sensing and Interaction</div>
+                        <div class="cv-detail">Workshop at UbiComp 2025</div>
                     </div>
-                </div>
-
-                <!-- Other Services -->
-                <div class="service-section" id="other-services">
-                    <h2 onclick="toggleSection('other-services')">Other Services</h2>
-                    <div class="section-content">
-                        <div class="service-item">
-                            <span class="service-year">2023-2027:</span>
-                            <span class="service-role">Associate Investigator,</span>
-                            <span class="service-venue">ARC Centre of Excellence for Automated Decision-Making and Society (ADM+S)</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-year">2020-2022:</span>
-                            <span class="service-role">Early Career Representative,</span>
-                            <span class="service-venue">ADM+S Research Infrastructure Committee</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-role">Early Career Editorial Board,</span>
-                            <span class="service-venue">Computer Systems Science and Engineering Journal</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-role">Guest Editor,</span>
-                            <span class="service-venue">Special Issue: Application of Time Series Analysis and Forecasting in Computer Science, Electronics</span>
-                        </div>
+                    <div class="cv-side">Espoo, Finland</div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">Aug. 2025</div>
+                    <div>
+                        <div class="cv-title">Tutorial Co-Chair, International Symposium on Spatial and Temporal Data (SSTD 2025)</div>
                     </div>
-                </div>
-            </article>
-        </div>
+                    <div class="cv-side">Osaka, Japan</div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">May 2025</div>
+                    <div>
+                        <div class="cv-title">The International Workshop on Spatio-Temporal Data Mining from the Web</div>
+                        <div class="cv-detail">Workshop at The Web Conference 2025</div>
+                    </div>
+                    <div class="cv-side">Sydney, Australia</div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">May 2025</div>
+                    <div>
+                        <div class="cv-title">Time Series Analysis in the Web: Recent Advances and Future Trends</div>
+                        <div class="cv-detail">Tutorial at The Web Conference 2025</div>
+                    </div>
+                    <div class="cv-side">Sydney, Australia</div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">May 2025</div>
+                    <div>
+                        <div class="cv-title">Brick-by-Brick: Cyber-Physical Building Data Classification Challenge</div>
+                        <div class="cv-detail">Competition at The Web Conference 2025</div>
+                    </div>
+                    <div class="cv-side">Sydney, Australia</div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">Oct. 2024</div>
+                    <div>
+                        <div class="cv-title">Student Competition and Challenges Co-Chair, UbiComp/ISWC 2024</div>
+                    </div>
+                    <div class="cv-side">Melbourne, Australia</div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">Oct. 2022</div>
+                    <div>
+                        <div class="cv-title">AI + IoT for Healthy and Equitable Mobility</div>
+                        <div class="cv-detail">Academic/industry workshop</div>
+                    </div>
+                    <div class="cv-side">Sydney, Australia</div>
+                </li>
+            </ul>
+        </section>
+        <section class="cv-section">
+            <h2>Program committees</h2>
+            <p class="cv-text">NeurIPS (Outstanding Reviewer), ICLR, ICML, KDD, The Web Conference, ACL, AAAI, IJCAI, CIKM, ACM MM, WACV, ACM SIGSPATIAL, ECML PKDD, PAKDD, MDM, ICONIP, SSTD, PRICAI, IROS</p>
+        </section>
+        <section class="cv-section">
+            <h2>Journal reviewing</h2>
+            <ul class="cv-plain">
+                <li>IEEE Transactions on Knowledge and Data Engineering (TKDE)</li>
+                <li>IEEE Transactions on Neural Networks and Learning Systems (TNNLS)</li>
+                <li>IEEE Transactions on Intelligent Transportation Systems (T-ITS)</li>
+                <li>IEEE Transactions on Mobile Computing (TMC)</li>
+                <li>IEEE Transactions on Multimedia (TMM)</li>
+                <li>ACM Transactions on Intelligent Systems and Technology (TIST)</li>
+                <li>ACM Transactions on Spatial Algorithms and Systems (TSAS)</li>
+                <li>Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies (IMWUT)</li>
+                <li>Pervasive and Mobile Computing</li>
+                <li>Neural Networks</li>
+                <li>Neurocomputing</li>
+                <li>Computer Vision and Image Understanding</li>
+            </ul>
+        </section>
+        <section class="cv-section">
+            <h2>Editorial roles</h2>
+            <ul class="cv-plain">
+                <li>Early Career Editorial Board, Computer Systems Science and Engineering Journal</li>
+                <li>Guest Editor, Special Issue &ldquo;Application of Time Series Analysis and Forecasting in Computer Science&rdquo;, Electronics</li>
+            </ul>
+        </section>
+        <section class="cv-section">
+            <h2>Invited talks</h2>
+            <ul class="cv-rows">
+                <li class="cv-row">
+                    <div class="cv-when">22 Aug. 2024</div>
+                    <div>
+                        <div class="cv-title">Automation in AV: Enhancing User Experiences or Diminishing Human Interaction?</div>
+                        <div class="cv-detail">Panel speaker, Integrate Conference</div>
+                    </div>
+                    <div class="cv-side">Sydney</div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">14 Jul. 2023</div>
+                    <div>
+                        <div class="cv-title">Modelling the Complex World with Generative AI and LLMs</div>
+                        <div class="cv-detail">Panel talk, ADM+S Symposium</div>
+                    </div>
+                    <div class="cv-side">Sydney</div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">12 Dec. 2022</div>
+                    <div>
+                        <div class="cv-title">Data-Efficient Learning of Dynamic Behaviours</div>
+                        <div class="cv-detail">Keynote, International School in AI and its Applications in Computer Science (ISAAC 2022)</div>
+                    </div>
+                    <div class="cv-side">Melbourne</div>
+                </li>
+            </ul>
+        </section>
+        <section class="cv-section">
+            <h2>Research visits</h2>
+            <ul class="cv-rows">
+                <li class="cv-row">
+                    <div class="cv-when">Nov. 2024</div>
+                    <div>
+                        <div class="cv-title">Technical University of Darmstadt</div>
+                        <div class="cv-detail">Host: Prof. Kristian Kersting</div>
+                    </div>
+                    <div class="cv-side"></div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">May 2024</div>
+                    <div>
+                        <div class="cv-title">National University of Singapore</div>
+                        <div class="cv-detail">Host: Prof. Bingsheng He</div>
+                    </div>
+                    <div class="cv-side"></div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">Apr. 2024</div>
+                    <div>
+                        <div class="cv-title">University of Amsterdam</div>
+                        <div class="cv-detail">Host: Prof. Maarten de Rijke</div>
+                    </div>
+                    <div class="cv-side"></div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">Nov. 2023</div>
+                    <div>
+                        <div class="cv-title">Technical University of Dortmund</div>
+                        <div class="cv-detail">Host: Asst. Prof. Thomas Liebig</div>
+                    </div>
+                    <div class="cv-side"></div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">Nov. 2023</div>
+                    <div>
+                        <div class="cv-title">Technical University of Darmstadt</div>
+                        <div class="cv-detail">Hosts: Prof. Kristian Kersting and Prof. Max M&uuml;hlh&auml;user</div>
+                    </div>
+                    <div class="cv-side"></div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">Nov. 2023</div>
+                    <div>
+                        <div class="cv-title">Saarland University</div>
+                        <div class="cv-detail">Host: Prof. Ingmar Weber</div>
+                    </div>
+                    <div class="cv-side"></div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">Nov. 2023</div>
+                    <div>
+                        <div class="cv-title">University of Munich (LMU)</div>
+                        <div class="cv-detail">Host: Prof. Matthias Schubert</div>
+                    </div>
+                    <div class="cv-side"></div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">Nov. 2023</div>
+                    <div>
+                        <div class="cv-title">Technical University of Munich</div>
+                        <div class="cv-detail">Host: Prof. Martin Werner</div>
+                    </div>
+                    <div class="cv-side"></div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">May 2023</div>
+                    <div>
+                        <div class="cv-title">The University of Tokyo</div>
+                        <div class="cv-detail">Host: Asst. Prof. Renhe Jiang</div>
+                    </div>
+                    <div class="cv-side"></div>
+                </li>
+            </ul>
+        </section>
+        <section class="cv-section">
+            <h2>Other service and outreach</h2>
+            <ul class="cv-rows">
+                <li class="cv-row">
+                    <div class="cv-when">2025</div>
+                    <div>
+                        <div class="cv-title">Invited participant, Shonan Meeting 210: Advancing Mobility Data Science and Mobility AI</div>
+                        <div class="cv-detail">One of 35 participants invited worldwide</div>
+                    </div>
+                    <div class="cv-side">Japan</div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">2023&ndash;2027</div>
+                    <div>
+                        <div class="cv-title">Associate Investigator, ARC Centre of Excellence for Automated Decision-Making and Society (ADM+S)</div>
+                    </div>
+                    <div class="cv-side">Australia</div>
+                </li>
+                <li class="cv-row">
+                    <div class="cv-when">2020&ndash;2022</div>
+                    <div>
+                        <div class="cv-title">Early Career Representative, ADM+S Research Infrastructure Committee</div>
+                    </div>
+                    <div class="cv-side">Australia</div>
+                </li>
+            </ul>
+        </section>
+
     </div>
-
     <!-- Footer -->
     <footer class="sticky-bottom mt-5">
         <div class="container">
-            &copy; Copyright 2025 Hao Xue.
-            Last updated: February 2025.
+            &copy; Copyright 2026 Hao Xue.
+            Last updated: October 2026.
         </div>
     </footer>
-
-    <!-- Bootstrap & MDB scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
-
-    <!-- Load Common JS -->
-    <script src="/assets/common.js"></script>
+    <!-- Bootstrap scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js"
+        integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A=="
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ=="
+        crossorigin="anonymous"></script>
 </body>
-</html> 
+</html>

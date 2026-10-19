@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>
-        Hao Xue
-    </title>
-    <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
-">
-    <!-- Open Graph -->
+    <title>Hao Xue</title>
+    <meta name="description" content="Hao Xue, Assistant Professor at HKUST(GZ). Research on spatiotemporal data, time series, LLMs and urban AI.">
     <!-- Bootstrap & MDB -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg=="
@@ -24,43 +20,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css"
         integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg=="
         crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css"
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
-    <!-- Code Syntax Highlighting -->
-    <link rel="stylesheet" href="https://combinatronics.io/jwarby/pygments-css/master/github.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
     <!-- Styles -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
     <link rel="stylesheet" href="/assets/main.css">
-    <link rel="canonical" href="/">
-
-    <!-- JQuery -->
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
         integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
         crossorigin="anonymous"></script>
-    <!-- Theming-->
+    <!-- Theming -->
     <script src="/assets/theme.js"></script>
     <script src="/assets/dark_mode.js"></script>
-    <!-- MathJax -->
-    <script type="text/javascript">
-        window.MathJax = {
-            tex: {
-                tags: 'ams'
-            }
-        };
-    </script>
-    <script defer type="text/javascript" id="MathJax-script"
-        src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
-    <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 </head>
 <body class="fixed-top-nav sticky-bottom-footer">
     <!-- Header -->
     <header>
-        <!-- Nav Bar -->
-        <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <nav id="navbar" class="navbar navbar-light navbar-expand-md fixed-top">
             <div class="container">
-                <a class="navbar-brand title font-weight-lighter" href="haoxue01.github.io/"></a>
-                <!-- Navbar Toggle -->
+                <a class="navbar-brand title font-weight-lighter" href="/"></a>
                 <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse"
                     data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -71,40 +48,26 @@
                 </button>
                 <div class="collapse navbar-collapse text-right" id="navbarNav">
                     <ul class="navbar-nav ml-auto flex-nowrap">
-                        <!-- About -->
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/">
-                                About
-                            </a>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">About<span class="sr-only">(current)</span></a>
                         </li>
-                        <!-- Other pages -->
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/publications.html">
-                                Publications
-                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/publications.html">Publications</a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/teaching.html">
-                                Teaching
-                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/awards.html">Grants &amp; Awards</a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/services.html">
-                                Service
-                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/teaching.html">Teaching</a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/supervision.html">
-                                Supervision
-                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/supervision.html">Supervision</a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="https://cruiseresearchgroup.github.io/">
-                                CRUISE Lab at UNSW
-                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/services.html">Service</a>
                         </li>
                         <div class="toggle-container">
-                            <a id="light-toggle">
+                            <a id="light-toggle" role="button" tabindex="0" aria-label="Switch light/dark theme">
                                 <i class="fas fa-moon"></i>
                                 <i class="fas fa-sun"></i>
                             </a>
@@ -120,74 +83,55 @@
             <article>
                 <div class="row">
                     <div class="col-sm-3">
-                        <img style="width: 180px;height: auto;" src="img/hao.jpeg">
+                        <img style="width: 180px;height: auto;" src="img/hao.jpeg" alt="Portrait of Hao Xue">
                     </div>
                     <div class="col-sm-9">
-                        <h1 class="post-title">
-                            Hao Xue
-                        </h1>
-                        <p class="desc">
-                        <p>Assistant Professor, The Hong Kong University of Science and Technology Guangzhou (HKUST-GZ), China
+                        <h1 class="post-title">Hao Xue</h1>
+                        <p class="desc">Assistant Professor, The Hong Kong University of Science and Technology (Guangzhou), China
+                            <br>AI Thrust and Urban Governance and Design Thrust (joint appointment)
                             <br>Senior Visiting Fellow, University of New South Wales, Australia</p>
-                        </p>
                         <div class="social">
                             <div class="contact-icons">
-                                <a href="mailto:haoxue@hkust-gz.edu.cn"><i
-                                        class="fas fa-envelope"></i></a>
-                                <!-- <a href="assets/pdf/cv.pdf"><i class="ai ai-cv"></i></a> -->
-                                <a href="https://scholar.google.com/citations?user=KwhLl7IAAAAJ&hl" target="_blank"
-                                    title="Google Scholar"><i class="ai ai-google-scholar"></i></a>
-                                <a href="https://www.linkedin.com/in/hao-x-491128141/" target="_blank" title="LinkedIn"><i
-                                        class="fab fa-linkedin"></i></a>
-                                <a href="https://github.com/xuehaouwa" target="_blank"><i class="fab fa-github"></i></a>
+                                <a href="mailto:haoxue@hkust-gz.edu.cn" title="Email" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                                <a href="https://scholar.google.com/citations?user=KwhLl7IAAAAJ&amp;hl=en" target="_blank" rel="noopener" title="Google Scholar" aria-label="Google Scholar"><i class="ai ai-google-scholar"></i></a>
+                                <a href="https://orcid.org/0000-0003-1700-9215" target="_blank" rel="noopener" title="ORCID" aria-label="ORCID"><i class="ai ai-orcid"></i></a>
+                                <a href="https://www.linkedin.com/in/hao-x-491128141/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/xuehaouwa" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub"><i class="fab fa-github"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="">
-
-                </div>
                 <div class="clearfix">
-                    <p>Hi! 
-                        I am an incoming Assistant Professor at The Hong Kong University of Science and Technology (Guangzhou) in Feb. 2026.
-                        Previously, I was a Lecturer at the School of Computer Science and Engineering at University of New South Wales (UNSW Sydney), Australia. 
-                        I also worked as a Research Fellow at the School of Computing Technologies at RMIT University and UNSW Sydney, after completing my doctorate. 
-                        I was an Associate Investigator at the UNSW node of the ARC Centre of Excellence for Automated Decision-Making and Society (<a href="https://www.admscentre.org.au/">ADM+S</a> 
-                        My research is at the intersection of AI and smart city domains (such as intelligent transportation, energy, weather etc.), with a focus on
-                        spatiotemporal data modelling, time series forecasting, language generation based forecasting, and data-efficient time series representation learning. 
-                        I am also interested in AI applications for wearable and IoT sensors.</p>
-                        <p>I obtained my PhD from The University of Western Australia in 2020. Before that, I obtained my bachelor's and master's degrees from Harbin Institute of Technology in 2014 and 2016.</p>
-                        <p> </p>
-                        <p class="font-italic">
-                            <strong>I am recruiting 2-3 PhD students in the 2026 Fall round and looking for motivated research interns and visiting students to join my team.</strong>
-                            
-                            <strong>Feel free to get in touch!</strong>
-                        </p>
-                </div>
-                <div class="">
-
+                    <p>Hi! I am an Assistant Professor at The Hong Kong University of Science and Technology (Guangzhou), with a joint appointment in the AI Thrust (Information Hub) and the Urban Governance and Design Thrust (Society Hub). I am also an Affiliated Assistant Professor at The Hong Kong University of Science and Technology, and a co-founder of Data Cruiser, a Sydney-based spin-out built on our research.</p>
+                    <p>Before joining HKUST(GZ) in February 2026, I was a Lecturer in the School of Computer Science and Engineering at the University of New South Wales (UNSW Sydney), Australia, and before that a Research Fellow at UNSW Sydney and RMIT University. I am an Associate Investigator of the ARC Centre of Excellence for Automated Decision-Making and Society (<a href="https://www.admscentre.org.au/">ADM+S</a>) and co-lead its GenAISim signature project.</p>
+                    <p>My research sits at the intersection of AI and ubiquitous, urban systems: spatiotemporal data representation and reasoning, foundation models for multimodal and dynamic environments, large language models for time series and sensor data, and open-world learning and reasoning. Applications include transportation and human mobility, energy and buildings, public health, and wearable and IoT sensing.</p>
+                    <p>I obtained my PhD in Computer Science from The University of Western Australia in 2020. Before that, I obtained my bachelor's and master's degrees from Harbin Institute of Technology in 2014 and 2016.</p>
                 </div>
 
                 <section id="news" class="news">
-                    <div class="container">
-                        <div class="section-title">
-                            <h2>News</h2>
+                    <div class="section-title">
+                        <h2>News</h2>
                         <div class="row">
                             <div class="col-lg-12 pt-4 pt-lg-0 content">
                                 <ul>
-                                    <li><i class="icofont-rounded"></i>02/2026: I will join HKUST-Guangzhou as an Assistant Professor.</li>
-                                    <li><i class="icofont-rounded"></i>11/2025: Our paper titled "XXLTraffic: Expanding and Extremely Long Traffic forecasting beyond test adaptation" has been awarded the best Paper Award at ACm SIGSPATIAL 2025. Congrats to all!</li>
-                                    <li><i class="icofont-rounded"></i>02/2025: I am invited to visit Osaka University.</li>
-                                    <li><i class="icofont-rounded"></i>02/2025: I am invited to participate <a href="https://shonan.nii.ac.jp/seminars/210/"></a>Shonan Meeting on Advancing Mobility Data Science and Mobility AI</a>.</li>
-                                    <li><i class="icofont-rounded"></i>01/2025: I serve as the tutorial co-chair of <a href="https://sstd2025.github.io/index.html"></a>SSTD2025</a>. <a href="https://sstd2025.github.io/callTutorials.html"></a>Call for Tutorial Proposals</a> is now open!</li>
-                                    <li><i class="icofont-rounded"></i>01/2025: 1 Demo paper has been accepted to The Web Conference 2025. See you at Sydney!</li>
-                                    <li><i class="icofont-rounded"></i>11/2024: I visited Artificial Intelligence and Machine Learning Lab @ TU Darmstadt led by <a href="https://www.ml.informatik.tu-darmstadt.de/people/kkersting/index.html">Prof. Dr. Kristian Kersting</a>.</li>
-                                    <li><i class="icofont-rounded"></i>10/2024: We organised 2024 <a href="https://adms-symposium.com/">ADM+S SYMPOSIUM</a> (15th Oct - 17th Oct) at UNSW Sydney. The theme of this year symposium is: automated mobilities.</li>
-                                    <li><i class="icofont-rounded"></i>10/2024: I was in Melbourne (4th Oct - 8th Oct) attending UbiComp/ISWC 2024.</li>
-                                    <li><i class="icofont-rounded"></i>09/2024: 2 papers have been accepted to NeurIPS 2024 Dataset and Benchmark. See you at Vancouver!</li>
-                                    <li><i class="icofont-rounded"></i>08/2024: 3 papers have been accepted to <a href="https://sigspatial2024.sigspatial.org/accepted-papers/#research">SIGSPTIAL 2024</a>. See you at Atlanta!</li>
-                                    <li><i class="icofont-rounded"></i>06/2024: Our ADM+S Project <a href="https://www.admscentre.org.au/genaisim-simulation-in-the-loop-for-multi-stakeholder-interactions-with-generative-agents/">GenAISim: Simulation in the Loop for Multi-Stakeholder Interactions with Generative Agents</a> has started!</li>
-                                    <li><i class="icofont-rounded"></i>05/2024: Co-organise <a href="https://pattern.swarma.org/study_group/42">online study/reading group</a> with a focus of Foundation Models for Spatio-temporal and Time-Series Data @ <a href="https://swarma.org/">Swarma Platform(集智俱乐部)</a></li>
+                                    <li>2026: 24 papers accepted this year: NeurIPS (4), ACL (3), The Web Conference (3), KDD (2), ICML, CIKM, EMNLP (2), ACM SIGSPATIAL (7) and ICDE 2027. Congratulations to all co-authors!</li>
+                                    <li>2026: Our US patent &ldquo;Methods, systems, devices and neural networks for forecasting a time series&rdquo; has been granted (US 12,688,375 B2).</li>
+                                    <li>08/2026: I served as Executive Chair of the 4th International Conference on Urban Science and Intelligence in Guangzhou.</li>
+                                    <li>02/2026: I joined HKUST(GZ) as an Assistant Professor.</li>
+                                    <li>11/2025: Our paper &ldquo;XXLTraffic: Expanding and Extremely Long Traffic Forecasting beyond Test Adaptation&rdquo; received the Best Paper Award at ACM SIGSPATIAL 2025. Congrats to all!</li>
+                                    <li>11/2025: We organised the 3rd ACM SIGSPATIAL International Workshop on Advances in Urban-AI (UrbanAI) in Minneapolis.</li>
+                                    <li>10/2025: We organised the UbiSense workshop on Emerging Techniques in Ubiquitous Sensing and Interaction at UbiComp 2025 in Espoo, Finland.</li>
+                                    <li>02/2025: I am invited to visit Osaka University.</li>
+                                    <li>02/2025: I am invited to participate in <a href="https://shonan.nii.ac.jp/seminars/210/">Shonan Meeting 210 on Advancing Mobility Data Science and Mobility AI</a>.</li>
+                                    <li>01/2025: I serve as the tutorial co-chair of <a href="https://sstd2025.github.io/index.html">SSTD 2025</a>.</li>
+                                    <li>01/2025: 1 demo paper has been accepted to The Web Conference 2025. See you in Sydney!</li>
+                                    <li>11/2024: I visited the Artificial Intelligence and Machine Learning Lab @ TU Darmstadt led by <a href="https://www.ml.informatik.tu-darmstadt.de/people/kkersting/index.html">Prof. Dr. Kristian Kersting</a>.</li>
+                                    <li>10/2024: We organised the 2024 <a href="https://adms-symposium.com/">ADM+S Symposium</a> (15&ndash;17 Oct) at UNSW Sydney, themed on automated mobilities.</li>
+                                    <li>10/2024: I was in Melbourne (4&ndash;8 Oct) attending UbiComp/ISWC 2024.</li>
+                                    <li>09/2024: 2 papers have been accepted to the NeurIPS 2024 Datasets and Benchmarks Track. See you in Vancouver!</li>
+                                    <li>08/2024: 3 papers have been accepted to <a href="https://sigspatial2024.sigspatial.org/accepted-papers/#research">ACM SIGSPATIAL 2024</a>. See you in Atlanta!</li>
+                                    <li>06/2024: Our ADM+S project <a href="https://www.admscentre.org.au/genaisim-simulation-in-the-loop-for-multi-stakeholder-interactions-with-generative-agents/">GenAISim: Simulation in the Loop for Multi-Stakeholder Interactions with Generative Agents</a> has started!</li>
+                                    <li>05/2024: Co-organised an <a href="https://pattern.swarma.org/study_group/42">online study/reading group</a> on Foundation Models for Spatio-temporal and Time-Series Data @ <a href="https://swarma.org/">Swarma (集智俱乐部)</a>.</li>
                                 </ul>
                             </div>
                         </div>
@@ -195,18 +139,11 @@
                 </section>
 
                 <section id="opportunities" class="opportunities">
-                    <div class="container">
-                        <div class="section-title">
-                            <h2>Opportunities</h2>
-                            <ul>
-                                <li><i class="icofont-rounded"></i>I am looking for PhD, MPhil, RA, and research interns to join my lab at HKUST-GZ. If you are interested in conducting high-quality research on urban computing, spatiotemporal data modelling, LLM, and related areas, please feel free to send me emails with your CV. I have multiple positions available! </li>
-                                <!-- <li><i class="icofont-rounded"></i> </li> -->
-                            </ul>
-                        </div>
+                    <div class="section-title">
+                        <h2>Opportunities</h2>
+                        <p>I am looking for PhD and MPhil students, research assistants and research interns to join my group at HKUST(GZ). If you would like to work on spatiotemporal data, time series, LLMs and urban AI, please email me with your CV.</p>
                     </div>
                 </section>
-
-
             </article>
         </div>
     </div>
@@ -217,29 +154,16 @@
             <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5u12s2p2e4s&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
         </div>
         <div class="container">
-            &copy; Copyright 2025 Hao Xue.
-            Last updated: Jan. 22, 2026.
+            &copy; Copyright 2026 Hao Xue.
+            Last updated: October 2026.
         </div>
     </footer>
+    <!-- Bootstrap scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js"
+        integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A=="
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ=="
+        crossorigin="anonymous"></script>
 </body>
-<!-- Bootsrap & MDB scripts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js"
-    integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A=="
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-    integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ=="
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"
-    integrity="sha512-Mug9KHKmroQFMLm93zGrjhibM2z2Obg9l6qFG2qKjXEXkMp/VDkI4uju9m4QKPjWSwQ6O2qzZEnJDEeCw0Blcw=="
-    crossorigin="anonymous"></script>
-<!-- Mansory & imagesLoaded -->
-<script defer src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-<script defer src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-<script defer src="/assets/mansory.js" type="text/javascript"></script>
-<!-- Medium Zoom JS -->
-<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"
-    integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
-<script src="/assets/zoom.js"></script>
-<!-- Load Common JS -->
-<script src="/assets/common.js"></script>
 </html>
